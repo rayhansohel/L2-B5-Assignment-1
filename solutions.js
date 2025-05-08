@@ -1,10 +1,16 @@
-// ----------- problem-1 Solutions---------------- //
 function formatString(input, toUpper) {
     if (toUpper === void 0) { toUpper = true; }
-    var result = toUpper ? input.toUpperCase() : input.toLowerCase();
+    return toUpper ? input.toUpperCase() : input.toLowerCase();
+}
+function filterByRating(items) {
+    var result = items.filter(function (item) { return item.rating >= 4; });
     console.log(result);
     return result;
 }
-formatString("Hello"); // Output: "HELLO"
-formatString("Hello", true); // Output: "HELLO"
-formatString("Hello", false); // Output: "hello"
+var books = [
+    { title: "Book A", rating: 4.5 },
+    { title: "Book B", rating: 4.2 },
+    { title: "Book C", rating: 5.0 }
+];
+filterByRating(books);
+
