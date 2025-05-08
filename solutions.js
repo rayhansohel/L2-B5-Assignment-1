@@ -1,63 +1,48 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-function formatString(input, toUpper) {
-    if (toUpper === void 0) { toUpper = true; }
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+function formatString(input, toUpper = true) {
     return toUpper ? input.toUpperCase() : input.toLowerCase();
 }
 function filterByRating(items) {
-    return items.filter(function (item) { return item.rating >= 4; });
+    return items.filter(item => item.rating >= 4);
 }
-function concatenateArrays() {
-    var arrays = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        arrays[_i] = arguments[_i];
-    }
-    return arrays.reduce(function (a, b) { return a.concat(b); }, []);
+function concatenateArrays(...arrays) {
+    return arrays.reduce((a, b) => a.concat(b), []);
 }
-var Vehicle = /** @class */ (function () {
-    function Vehicle(make, year) {
+class Vehicle {
+    constructor(make, year) {
         this.make = make;
         this.year = year;
     }
-    Vehicle.prototype.getInfo = function () {
-        return "Make: ".concat(this.make, ", Year: ").concat(this.year);
-    };
-    return Vehicle;
-}());
-var Car = /** @class */ (function (_super) {
-    __extends(Car, _super);
-    function Car(make, year, model) {
-        var _this = _super.call(this, make, year) || this;
-        _this.model = model;
-        return _this;
+    getInfo() {
+        return `Make: ${this.make}, Year: ${this.year}`;
     }
-    Car.prototype.getModel = function () {
-        return "Model: ".concat(this.model);
-    };
-    return Car;
-}(Vehicle));
+}
+class Car extends Vehicle {
+    constructor(make, year, model) {
+        super(make, year);
+        this.model = model;
+    }
+    getModel() {
+        return `Model: ${this.model}`;
+    }
+}
 function processValue(value) {
     return typeof value === "string" ? value.length : value * 2;
 }
 function getMostExpensiveProduct(products) {
     if (products.length === 0)
         return null;
-    var expensiveProduct = products[0];
-    for (var _i = 0, products_1 = products; _i < products_1.length; _i++) {
-        var product = products_1[_i];
+    let expensiveProduct = products[0];
+    for (const product of products) {
         if (product.price > expensiveProduct.price) {
             expensiveProduct = product;
         }
@@ -77,6 +62,23 @@ var Day;
 function getDayType(day) {
     return day === Day.Saturday || day === Day.Sunday ? "Weekend" : "Weekday";
 }
-console.log(getDayType(Day.Monday));
-console.log(getDayType(Day.Sunday));
-console.log(getDayType(Day.Friday));
+function squareAsync(n) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (n < 0) {
+                    reject(new Error("Negative number not allowed"));
+                }
+                else {
+                    resolve(n * n);
+                }
+            }, 1000);
+        });
+    });
+}
+squareAsync(-4)
+    .then(result => console.log(result))
+    .catch(error => console.error(error.message));
+squareAsync(89)
+    .then(result => console.log(result))
+    .catch(error => console.error(error.message));
