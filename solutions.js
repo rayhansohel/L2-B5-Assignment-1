@@ -52,5 +52,25 @@ var Car = /** @class */ (function (_super) {
 function processValue(value) {
     return typeof value === "string" ? value.length : value * 2;
 }
-console.log(processValue("hello"));
-console.log(processValue(10));
+function getMostExpensiveProduct(products) {
+    if (products.length === 0)
+        return null;
+    var expensiveProduct = products[0];
+    for (var _i = 0, products_1 = products; _i < products_1.length; _i++) {
+        var product = products_1[_i];
+        if (product.price > expensiveProduct.price) {
+            expensiveProduct = product;
+        }
+    }
+    return expensiveProduct;
+}
+var products = [
+    { name: "Pen", price: 10 },
+    { name: "Notebook", price: 25 },
+    { name: "Bag", price: 50 }
+];
+var products2 = [
+
+];
+console.log(getMostExpensiveProduct(products));
+console.log(getMostExpensiveProduct(products2));

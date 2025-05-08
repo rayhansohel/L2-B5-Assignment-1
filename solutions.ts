@@ -4,9 +4,11 @@ function formatString(input: string, toUpper: boolean = true): string {
 }
 
 
+
 function filterByRating(items: { title: string; rating: number }[]): { title: string; rating: number }[] {
     return items.filter(item => item.rating >= 4);
 }
+
 
 
 function concatenateArrays<T>(...arrays: T[][]): T[] {
@@ -41,6 +43,30 @@ class Car extends Vehicle {
 }
 
 
+
 function processValue(value: string | number): number {
     return typeof value === "string" ? value.length : value * 2;
 }
+
+
+interface Product {
+    name: string;
+    price: number;
+}
+  
+function getMostExpensiveProduct(products: Product[]): Product | null {
+    if (products.length === 0) return null;
+  
+    let expensiveProduct = products[0];
+  
+    for (const product of products) {
+      if (product.price > expensiveProduct.price) {
+        expensiveProduct = product;
+      }
+    }
+  
+    return expensiveProduct;
+}
+
+
+  
