@@ -49,7 +49,8 @@ var Car = /** @class */ (function (_super) {
     };
     return Car;
 }(Vehicle));
-
-var myCar = new Car("BMW", 2018, "S");
-console.log(myCar.getInfo());
-console.log(myCar.getModel());
+function processValue(value) {
+    return typeof value === "string" ? value.length : value * 2;
+}
+console.log(processValue("hello"));
+console.log(processValue(10));
